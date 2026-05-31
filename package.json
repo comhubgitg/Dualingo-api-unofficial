@@ -1,0 +1,23 @@
+{
+  "name": "dualingo-api-unofficial",
+  "version": "1.0.0",
+  "description": "Unofficial read-only API wrapper for Duolingo profile streaks and course XP.",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node test/duolingoClient.test.js"
+  },
+  "keywords": [
+    "duolingo",
+    "api",
+    "unofficial",
+    "streak",
+    "xp"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  }
+}

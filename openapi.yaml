@@ -1,0 +1,175 @@
+openapi: 3.0.3
+info:
+  title: Dualingo API Unofficial
+  version: 1.0.0
+  description: Unofficial read-only API wrapper for Duolingo profile streaks and course XP.
+servers:
+  - url: http://127.0.0.1:3000
+paths:
+  /health:
+    get:
+      summary: Health check and endpoint list
+      responses:
+        "200":
+          description: API is running
+  /api/users/{username}/summary:
+    get:
+      summary: Get normalized user summary
+      parameters:
+        - $ref: "#/components/parameters/Username"
+      responses:
+        "200":
+          description: User summary with streak and course XP
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserSummary"
+  /api/users/{username}/streak:
+    get:
+      summary: Get streak data
+      parameters:
+        - $ref: "#/components/parameters/Username"
+      responses:
+        "200":
+          description: Streak data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Streak"
+  /api/users/{username}/courses:
+    get:
+      summary: Get XP for each course
+      parameters:
+        - $ref: "#/components/parameters/Username"
+      responses:
+        "200":
+          description: Courses sorted by XP descending
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    nullable: true
+                  username:
+                    type: string
+                    nullable: true
+                  totalXp:
+                    type: integer
+                    nullable: true
+                  courses:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Course"
+  /api/users/{username}/raw:
+    get:
+      summary: Get raw Duolingo profile response for debugging
+      parameters:
+        - $ref: "#/components/parameters/Username"
+      responses:
+        "200":
+          description: Raw upstream user payload
+  /api/users/id/{id}/summary:
+    get:
+      summary: Get normalized user summary by Duolingo user id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: User summary with streak and course XP
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserSummary"
+components:
+  parameters:
+    Username:
+      name: username
+      in: path
+      required: true
+      schema:
+        type: string
+        minLength: 2
+        maxLength: 40
+  schemas:
+    UserSummary:
+      type: object
+      properties:
+        id:
+          type: integer
+          nullable: true
+        username:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        picture:
+          type: string
+          nullable: true
+        streak:
+          type: integer
+        totalXp:
+          type: integer
+        currentCourseId:
+          type: string
+          nullable: true
+        learningLanguage:
+          type: string
+          nullable: true
+        fromLanguage:
+          type: string
+          nullable: true
+        courses:
+          type: array
+          items:
+            $ref: "#/components/schemas/Course"
+    Streak:
+      type: object
+      properties:
+        id:
+          type: integer
+          nullable: true
+        username:
+          type: string
+          nullable: true
+        streak:
+          type: integer
+        rawStreak:
+          type: integer
+          nullable: true
+        currentStreak:
+          nullable: true
+        previousStreak:
+          nullable: true
+    Course:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        learningLanguage:
+          type: string
+          nullable: true
+        fromLanguage:
+          type: string
+          nullable: true
+        xp:
+          type: integer
+        crowns:
+          type: integer
+          nullable: true
+        healthEnabled:
+          type: boolean
+          nullable: true
+        placementTestAvailable:
+          type: boolean
+          nullable: true
