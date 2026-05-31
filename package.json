@@ -4,6 +4,14 @@
   "description": "Unofficial read-only API wrapper for Duolingo profile streaks and course XP.",
   "type": "module",
   "main": "src/server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/comhubgitg/Dualingo-api-unofficial.git"
+  },
+  "homepage": "https://github.com/comhubgitg/Dualingo-api-unofficial#readme",
+  "bugs": {
+    "url": "https://github.com/comhubgitg/Dualingo-api-unofficial/issues"
+  },
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",

@@ -2,6 +2,8 @@
 
 Unofficial read-only API wrapper for Duolingo profile stats. It returns streak data, total XP, and XP per course.
 
+Original repository: https://github.com/comhubgitg/Dualingo-api-unofficial
+
 This is not an official Duolingo API. Duolingo can change or block the underlying endpoints at any time. Use it gently and do not use it for XP farming, automation, spam, or anything that violates Duolingo's terms.
 
 ## Requirements
